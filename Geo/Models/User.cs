@@ -24,6 +24,16 @@ namespace Geo.Models
         [Display(Name = "Comment")]
         public string comment { get; set; }
 
+        public User()
+        {
+            this.daysPersonal = 6;
+            this.daysSick = 1;
+            this.daysVacation = 4;
+        }
 
+        public void UpdatePersonal()
+        {
+            this.daysPersonal += 1;
+        }
     }
 }

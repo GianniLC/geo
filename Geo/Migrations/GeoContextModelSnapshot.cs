@@ -30,7 +30,8 @@ namespace Geo.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<string>("comment")
-                    .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("daysPersonal")
                         .HasColumnType("int");
@@ -51,7 +52,7 @@ namespace Geo.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

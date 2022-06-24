@@ -14,12 +14,12 @@ namespace Geo.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    fname = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    lname = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    daysVacation = table.Column<int>(type: "int", nullable: true),
-                    daysSick = table.Column<int>(type: "int", nullable: true),
-                    daysPersonal = table.Column<int>(type: "int", nullable: true),
-                    comment = table.Column<string>(type: "nvarchar(200)", nullable: true),
+                    fname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    daysVacation = table.Column<int>(type: "int", nullable: false),
+                    daysSick = table.Column<int>(type: "int", nullable: false),
+                    daysPersonal = table.Column<int>(type: "int", nullable: false),
+                    comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                 },
                 constraints: table =>
                 {

@@ -27,14 +27,6 @@ namespace Geo.Controllers
                           Problem("Entity set 'GeoContext.User'  is null.");
         }
 
-        public IActionResult Welcome(string name, int numTimes)
-        {
-            ViewData["Message"] = $"Hello {name}";
-            ViewData["numTimes"] = numTimes;
-
-            return View();
-        }
-
         // GET: User/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -64,7 +56,7 @@ namespace Geo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,fname,lname,daysVacation,daysSick,daysPersonal")] User user)
+        public async Task<IActionResult> Create([Bind("id,fname,lname,daysVacation,daysSick,daysPersonal,comment")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +88,7 @@ namespace Geo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,fname,lname,daysVacation,daysSick,daysPersonal")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("id,fname,lname,daysVacation,daysSick,daysPersonal,comment")] User user)
         {
             if (id != user.id)
             {
