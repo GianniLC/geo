@@ -6,18 +6,13 @@ namespace Geo.Models
     {
         public int id { get; set; }
 
-        public DateTime dateStart { get; set; }
-        public DateTime dateEnd { get; set; }
+        public DateTime? dateStart { get; set; }
+        public DateTime? dateEnd { get; set; }
 
-        public string[] reason = {"isPersonal", "isSick", "isVacation"};
+        [Display(Name = "Type of absence")]
+        public AbsenceTypes AbsenceTypes { get; set; }
 
-        private User user; 
-
-        public Absence()
-        {
-            // which reason do we submit the absence for?
-            user.daysPersonal = +1;
-        }
-
+        
+        public User user; 
     }
 }

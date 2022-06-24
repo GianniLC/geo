@@ -15,5 +15,9 @@ namespace Geo.Data
         }
 
         public DbSet<Geo.Models.User>? User { get; set; }
+
+        public DbSet<Geo.Models.Absence>? Absence { get; set; }
+
+        public DbSet<Geo.Models.AbsenceTypes>? AbsenceTypes { get; set; }
     }
 }
