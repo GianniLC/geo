@@ -21,14 +21,23 @@ namespace Geo.Models
         [Display(Name = "Personal")]
         public int daysPersonal { get; set; }
 
+        [Display(Name = "Leftover days")]
+        public int daysLeft { get; set; }
+
         [Display(Name = "Comment")]
-        public string comment { get; set; }
+        public string? comment { get; set; }
 
         public User()
         {
-            this.daysPersonal = 6;
-            this.daysSick = 1;
-            this.daysVacation = 4;
+            // COMMON VALUES
+
+            // upon creating a user set all the values to 0 
+            this.daysPersonal = 0;
+            this.daysSick = 0;
+            this.daysVacation = 0;
+
+            // 10 free absence days left || TEST PURPOSE
+            this.daysLeft = 10;
         }
 
         public void UpdatePersonal()

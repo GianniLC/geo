@@ -33,6 +33,9 @@ namespace Geo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("daysLeft")
+                        .HasColumnType("int");
+
                     b.Property<int>("daysPersonal")
                         .HasColumnType("int");
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Geo.Migrations
 {
     [DbContext(typeof(GeoContext))]
-    [Migration("20220624111647_InitialCreate")]
+    [Migration("20220624121816_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace Geo.Migrations
                     b.Property<string>("comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("daysLeft")
+                        .HasColumnType("int");
 
                     b.Property<int>("daysPersonal")
                         .HasColumnType("int");

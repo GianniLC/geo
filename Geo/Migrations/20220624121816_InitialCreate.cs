@@ -19,7 +19,8 @@ namespace Geo.Migrations
                     daysVacation = table.Column<int>(type: "int", nullable: false),
                     daysSick = table.Column<int>(type: "int", nullable: false),
                     daysPersonal = table.Column<int>(type: "int", nullable: false),
-                    comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    daysLeft = table.Column<int>(type: "int", nullable: false),
+                    comment = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
