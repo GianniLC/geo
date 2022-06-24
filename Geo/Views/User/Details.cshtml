@@ -1,0 +1,54 @@
+﻿@model Geo.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.fname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.lname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.lname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.daysVacation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.daysVacation)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.daysSick)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.daysSick)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.daysPersonal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.daysPersonal)
+        </dd>
+                <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
