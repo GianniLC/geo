@@ -10,16 +10,19 @@ namespace Geo.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AbsenceTypes",
+                name: "Absence",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    absenceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbsenceTypes", x => x.id);
+                    table.PrimaryKey("PK_Absence", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,32 +43,6 @@ namespace Geo.Migrations
                 {
                     table.PrimaryKey("PK_User", x => x.id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Absence",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    dateStart = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    dateEnd = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AbsenceTypesid = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Absence", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Absence_AbsenceTypes_AbsenceTypesid",
-                        column: x => x.AbsenceTypesid,
-                        principalTable: "AbsenceTypes",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Absence_AbsenceTypesid",
-                table: "Absence",
-                column: "AbsenceTypesid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -75,9 +52,6 @@ namespace Geo.Migrations
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropTable(
-                name: "AbsenceTypes");
         }
     }
 }

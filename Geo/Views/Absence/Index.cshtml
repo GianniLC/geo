@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Create a new form</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.user)
+                @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AbsenceTypes)
+                @Html.DisplayNameFor(model => model.absenceType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dateStart)
+                @Html.DisplayNameFor(model => model.startDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dateEnd)
+                @Html.DisplayNameFor(model => model.endDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th></th>
         </tr>
@@ -31,17 +37,64 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.dateStart)
+                @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dateEnd)
+                @Html.DisplayFor(modelItem => item.absenceType)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                @Html.DisplayFor(modelItem => item.startDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endDate)
+            </td>
+            <td>
+            @{
+                switch (@item.approved)
+                {
+                    case "0":
+                            <text>
+                                <p>Not approved</p>
+                            </text>
+                    break;  
+
+                    case "1":
+                            <text>
+                                <p>Approved</p>
+                            </text>
+                    break;  
+
+                    case "2":
+                            <text>
+                                <p>In review</p>
+                            </text>
+                    break;  
+
+                    default:
+                            <text>
+                                <p>In review</p>
+                            </text>
+                    break;  
+                }
+            }
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <!--<a asp-action="Edit" asp-route-id="@item.Id">edit</a> -->
             </td>
         </tr>
 }
+    <div>
+        <p>Om een registratie te editen simuleren we een managers account dit kan door middel van localhost:7174/Absence/{id}?userID=0 anders krijg je een return not found bijvoorbeeld</p>
+        <a href="https://localhost:7174/Absence/Edit/7?userID=0">klik hier om formulier 7 aan te passen</a><br/>
+        <a href="https://localhost:7174/Absence/Edit/7?userID=1">klik hier zonder de user ID mee te geven</a>
+    </div>
+
     </tbody>
 </table>

@@ -14,29 +14,6 @@ namespace Geo.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<GeoContext>>()))
             {
-                if (context.AbsenceTypes.Any())
-                {
-                    return; // DB has been seeded
-                }
-
-                context.AbsenceTypes.AddRange(
-                    new AbsenceTypes
-                    {
-                        name = "Personal",
-                    },
-
-                    new AbsenceTypes
-                    {
-                        name = "Vacation",
-                    },
-
-                    new AbsenceTypes
-                    {
-                        name = "Sick",
-                    }
-                );
-
-                // Look for any movies.
                 if (context.User.Any())
                 {
                     return;   // DB has been seeded

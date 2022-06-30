@@ -15,26 +15,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = E:\School\leerjaar_2\C#\Geo\Geo
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/School/leerjaar_2/C\#/Geo/Geo/Views/AbsenceTypes/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVR5cGVzXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/School/leerjaar_2/C\#/Geo/Geo/Views/AbsenceTypes/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVR5cGVzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/School/leerjaar_2/C\#/Geo/Geo/Views/AbsenceTypes/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVR5cGVzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/School/leerjaar_2/C\#/Geo/Geo/Views/AbsenceTypes/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVR5cGVzXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/School/leerjaar_2/C\#/Geo/Geo/Views/AbsenceTypes/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVR5cGVzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [E:/School/leerjaar_2/C\#/Geo/Geo/Views/Absence/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

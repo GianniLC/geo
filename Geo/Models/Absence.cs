@@ -4,15 +4,30 @@ namespace Geo.Models
 {
     public class Absence
     {
-        public int id { get; set; }
+        [Display(Name = "Form ID")]
+        public int Id { get; set; }
 
-        public DateTime? dateStart { get; set; }
-        public DateTime? dateEnd { get; set; }
+        [Display(Name = "Enter your name")]
+        public string name { get; set; }
 
-        [Display(Name = "Type of absence")]
-        public AbsenceTypes AbsenceTypes { get; set; }
+        [Display(Name = "Reason of absence")]
+        public string absenceType { get; set; }
 
-        
-        public User user; 
+        [Display(Name = "Starting date")]
+        public DateTime? startDate { get; set; }
+
+        [Display(Name = "Ending date")]
+        public DateTime? endDate { get; set; }
+
+        [Display(Name = "Status")]
+        public string? approved { get; set; }
+    }
+
+
+    public enum AbsenceType
+    {
+        SICK,
+        VACATION,
+        PERSONAL
     }
 }

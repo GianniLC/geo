@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Geo.Migrations
 {
     [DbContext(typeof(GeoContext))]
-    [Migration("20220624132706_InitialCreate")]
+    [Migration("20220630145108_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,43 +26,29 @@ namespace Geo.Migrations
 
             modelBuilder.Entity("Geo.Models.Absence", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AbsenceTypesid")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("dateEnd")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("dateStart")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("AbsenceTypesid");
-
-                    b.ToTable("Absence");
-                });
-
-            modelBuilder.Entity("Geo.Models.AbsenceTypes", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    b.Property<string>("absenceType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("AbsenceTypes");
+                    b.ToTable("Absence");
                 });
 
             modelBuilder.Entity("Geo.Models.User", b =>
@@ -99,17 +85,6 @@ namespace Geo.Migrations
                     b.HasKey("id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Geo.Models.Absence", b =>
-                {
-                    b.HasOne("Geo.Models.AbsenceTypes", "AbsenceTypes")
-                        .WithMany()
-                        .HasForeignKey("AbsenceTypesid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AbsenceTypes");
                 });
 #pragma warning restore 612, 618
         }

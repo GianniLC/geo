@@ -36,7 +36,7 @@ namespace Geo.Controllers
             }
 
             var absence = await _context.Absence
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (absence == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace Geo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,dateStart,dateEnd")] Absence absence)
+        public async Task<IActionResult> Create([Bind("Id,name,absenceType,startDate,endDate, approved")] Absence absence)
         {
             if (ModelState.IsValid)
             {
@@ -67,9 +67,15 @@ namespace Geo.Controllers
             return View(absence);
         }
 
-        // GET: Absence/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Absence/Edit/5?userID=0
+        public async Task<IActionResult> Edit(int? id, int userID = 1)
         {
+
+            if (userID != 0)
+            {
+                return NotFound();
+            }
+
             if (id == null || _context.Absence == null)
             {
                 return NotFound();
@@ -88,9 +94,9 @@ namespace Geo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,dateStart,dateEnd")] Absence absence)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,name,absenceType,startDate,endDate, approved")] Absence absence)
         {
-            if (id != absence.id)
+            if (id != absence.Id)
             {
                 return NotFound();
             }
@@ -104,7 +110,7 @@ namespace Geo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AbsenceExists(absence.id))
+                    if (!AbsenceExists(absence.Id))
                     {
                         return NotFound();
                     }
@@ -127,7 +133,7 @@ namespace Geo.Controllers
             }
 
             var absence = await _context.Absence
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (absence == null)
             {
                 return NotFound();
@@ -157,7 +163,7 @@ namespace Geo.Controllers
 
         private bool AbsenceExists(int id)
         {
-          return (_context.Absence?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.Absence?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

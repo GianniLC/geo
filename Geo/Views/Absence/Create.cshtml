@@ -1,4 +1,6 @@
-﻿@model Geo.Models.Absence
+﻿@using Geo.Models;
+
+@model Absence
 
 @{
     ViewData["Title"] = "Create";
@@ -12,27 +14,33 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <!-- User -->
             <div class="form-group">
-                <label asp-for="user" class="control-label"></label>
-                <input asp-for="user" class="form-control" />
-                <span asp-validation-for="user" class="text-danger"></span>
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
             </div>
-            <!-- Type -->
-
-
 
             <div class="form-group">
-                <label asp-for="dateStart" class="control-label"></label>
-                <input asp-for="dateStart" class="form-control" />
-                <span asp-validation-for="dateStart" class="text-danger"></span>
+                <label asp-for="startDate" class="control-label"></label>
+                <input asp-for="startDate" class="form-control" />
+                <span asp-validation-for="startDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="dateEnd" class="control-label"></label>
-                <input asp-for="dateEnd" class="form-control" />
-                <span asp-validation-for="dateEnd" class="text-danger"></span>
+                <label asp-for="endDate" class="control-label"></label>
+                <input asp-for="endDate" class="form-control" />
+                <span asp-validation-for="endDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 10px; margin-bottom: 10px;">
+                <label asp-for="absenceType" class="control-label"></label>
+                    @Html.DropDownListFor(t => t.absenceType,
+                        new SelectList(Enum.GetValues(typeof(AbsenceType))),
+                        "Select type")
+                <span asp-validation-for="absenceType" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="approved" name="check" value="2" />
+
+            <div class="form-group" style="padding-top: 5px;">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -40,7 +48,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back</a>
 </div>
 
 @section Scripts {
