@@ -24,13 +24,22 @@ namespace Geo.Migrations
 
             modelBuilder.Entity("Geo.Models.Absence", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("absenceType")
+                    b.Property<int?>("AbsenceTypeRefID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserRefId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("absenceReason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -47,18 +56,44 @@ namespace Geo.Migrations
                     b.Property<DateTime?>("startDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Absence");
                 });
 
-            modelBuilder.Entity("Geo.Models.User", b =>
+            modelBuilder.Entity("Geo.Models.AbsenceType", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeOfAbsence")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AbsenceTypes");
+                });
+
+            modelBuilder.Entity("Geo.Models.User", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("AbsenceRefId")
+                        .HasColumnType("int");
 
                     b.Property<string>("comment")
                         .HasColumnType("nvarchar(max)");
@@ -83,9 +118,21 @@ namespace Geo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("ID");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Geo.Models.Absence", b =>
+                {
+                    b.HasOne("Geo.Models.User", null)
+                        .WithMany("absences")
+                        .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("Geo.Models.User", b =>
+                {
+                    b.Navigation("absences");
                 });
 #pragma warning restore 612, 618
         }

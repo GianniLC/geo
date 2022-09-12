@@ -36,7 +36,7 @@ namespace Geo.Controllers
             }
 
             var user = await _context.User
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
                 return NotFound();
@@ -90,7 +90,7 @@ namespace Geo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,fname,lname,daysVacation,daysSick,daysPersonal,daysLeft,comment")] User user)
         {
-            if (id != user.id)
+            if (id != user.ID)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace Geo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.id))
+                    if (!UserExists(user.ID))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace Geo.Controllers
             }
 
             var user = await _context.User
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace Geo.Controllers
 
         private bool UserExists(int id)
         {
-          return (_context.User?.Any(e => e.id == id)).GetValueOrDefault();
+          return (_context.User?.Any(e => e.ID == id)).GetValueOrDefault();
         }
     }
 }

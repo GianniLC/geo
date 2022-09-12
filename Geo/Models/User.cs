@@ -1,10 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Geo.Models
 {
     public class User
     {
-        public int id { get; set; }
+        public int ID { get; set; }
+
+        [ForeignKey("Absence")]
+        public int? AbsenceRefId { get; set; }
+        public ICollection<Absence> absences { get; set; }
 
         [Display(Name = "First name")]
         public string fname { get; set; }
@@ -26,6 +31,7 @@ namespace Geo.Models
 
         [Display(Name = "Comment")]
         public string? comment { get; set; }
+
 
         public User()
         {
