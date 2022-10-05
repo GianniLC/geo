@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Versioning;
 
 namespace Geo.Models
 {
@@ -7,15 +8,15 @@ namespace Geo.Models
     {
         public int ID { get; set; }
 
-        [ForeignKey("Absence")]
         public int? AbsenceRefId { get; set; }
-        public ICollection<Absence> absences { get; set; }
+        public IList<Absence> absences { get; set; }
 
         [Display(Name = "First name")]
         public string fname { get; set; }
 
         [Display(Name = "Last name")]
         public string lname { get; set; }
+
 
         [Display(Name = "Vacation")]
         public int daysVacation { get; set; }
@@ -32,11 +33,15 @@ namespace Geo.Models
         [Display(Name = "Comment")]
         public string? comment { get; set; }
 
+        public string role { get; set; }
 
-        public User()
+
+        public User(string role = "member")
         {
             // COMMON VALUES
 
+            // Initialize the list for the absences
+            this.absences = new List<Absence>();
             // upon creating a user set all the values to 0 
             this.daysPersonal = 0;
             this.daysSick = 0;
@@ -44,11 +49,7 @@ namespace Geo.Models
 
             // 10 free absence days left || TEST PURPOSE
             this.daysLeft = 10;
-        }
-
-        public void UpdatePersonal()
-        {
-            this.daysPersonal += 1;
+            this.role = role;
         }
     }
 }

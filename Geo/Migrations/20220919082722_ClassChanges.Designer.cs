@@ -4,6 +4,7 @@ using Geo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Geo.Migrations
 {
     [DbContext(typeof(GeoContext))]
-    partial class GeoContextModelSnapshot : ModelSnapshot
+    [Migration("20220919082722_ClassChanges")]
+    partial class ClassChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace Geo.Migrations
                     b.Property<int?>("AbsenceTypeRefID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UserRefId")
                         .HasColumnType("int");
 
@@ -51,9 +50,12 @@ namespace Geo.Migrations
                     b.Property<DateTime?>("startDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("userID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("userID");
 
                     b.ToTable("Absence");
                 });
@@ -111,10 +113,6 @@ namespace Geo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ID");
 
                     b.ToTable("User");
@@ -122,9 +120,11 @@ namespace Geo.Migrations
 
             modelBuilder.Entity("Geo.Models.Absence", b =>
                 {
-                    b.HasOne("Geo.Models.User", null)
+                    b.HasOne("Geo.Models.User", "user")
                         .WithMany("absences")
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("userID");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Geo.Models.User", b =>

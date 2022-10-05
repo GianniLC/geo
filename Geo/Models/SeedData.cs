@@ -14,30 +14,31 @@ namespace Geo.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<GeoContext>>()))
             {
+
+                if(context.AbsenceTypes.Count() == 0)
+                {
+                    context.AbsenceTypes.AddRange(
+                        new AbsenceType
+                        {
+                            TypeOfAbsence = "Personal",
+                            Description = "Personal reasons"
+                        },
+
+                        new AbsenceType
+                        {
+                            TypeOfAbsence = "Sick",
+                            Description = "For sick days"
+                        },
+
+                        new AbsenceType {
+                            TypeOfAbsence = "Vacation",
+                            Description = "Required for vacation days"
+                        }
+                    );
+                }
+
                 // Seed data for absencetypes
-                context.AbsenceTypes.AddRange(
-                    new AbsenceType
-                    {
-                        ID = 1,
-                        TypeOfAbsence = "Personal",
-                        Description = "Personal reasons"
-                    },
 
-                    new AbsenceType
-                    {
-                        ID=2,
-                        TypeOfAbsence = "Sick",
-                        Description = "For sick days"
-                    },
-
-                    new AbsenceType
-                    {
-                        ID=3,
-                        TypeOfAbsence = "Vacation",
-                        Description = "Required for vacation days"
-                    }
-                );
-                
                 // Check for users last to seed
                 if (context.User.Any())
                 {
@@ -48,14 +49,22 @@ namespace Geo.Models
                 context.User.AddRange(
                     new User
                     {
+                        fname = "Admin",
+                        lname = "Admin",
+                        role = "Admin"
+                    },
+                    new User
+                    {
                         fname = "Gianni",
                         lname = "Cimanez",
+                        role = "HR"
                     },
 
                     new User
                     {
                         fname = "Kyara",
                         lname = "De winter",
+                        role = "HR"
                     },
 
                     new User

@@ -35,6 +35,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/School/leerjaar_2/C\#/Geo/Geo/Views/Absence/IndexAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJzZW5jZVxJbmRleEFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/School/leerjaar_2/C\#/Geo/Geo/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +53,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/School/leerjaar_2/C\#/Geo/Geo/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/School/leerjaar_2/C\#/Geo/Geo/Views/User/Absence.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBYnNlbmNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/School/leerjaar_2/C\#/Geo/Geo/Views/User/Create.cshtml]
@@ -69,6 +77,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/School/leerjaar_2/C\#/Geo/Geo/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/School/leerjaar_2/C\#/Geo/Geo/Views/User/ShowAllAbsence.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaG93QWxsQWJzZW5jZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/School/leerjaar_2/C\#/Geo/Geo/Views/_ViewImports.cshtml]

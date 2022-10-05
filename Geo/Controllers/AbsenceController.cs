@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Geo.Data;
 using Geo.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Dynamic;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Geo.Controllers
 {
@@ -19,30 +22,65 @@ namespace Geo.Controllers
             _context = context;
         }
 
+        // GET: Absence/Admin
+        public async Task<IActionResult> Admin()
+        {
+            List<ViewModel> models = new();
+
+            var data = await _context.Absence.ToListAsync();
+
+            foreach(var item in data)
+            {
+                ViewModel model = new();
+
+                var person = await _context.User.FirstOrDefaultAsync(x => x.ID == item.UserRefId);
+
+                model.user = person;
+                model.absence = item;
+
+                models.Add(model);
+
+                ViewBag.isAdmin = true;
+            }
+
+
+            return View("IndexAdmin", models);
+        }
+
         // GET: Absence
         public async Task<IActionResult> Index()
         {
-              return _context.Absence != null ? 
-                          View(await _context.Absence.ToListAsync()) :
+            ViewBag.isAdmin = false;
+
+            var data = await _context.Absence.ToListAsync();
+
+            List<ViewModel> models = new List<ViewModel>();
+
+            foreach(var item in data)
+            {
+                ViewModel model = new ViewModel();
+                model.absence = item;
+                var person = _context.User.FirstOrDefault(x => x.ID == item.UserRefId);
+                model.user = person;
+                models.Add(model);
+            }
+
+
+            return _context.Absence != null ? 
+                          View(models) :
                           Problem("Entity set 'GeoContext.Absence'  is null.");
         }
 
         // GET: Absence/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Absence == null)
-            {
-                return NotFound();
-            }
+            var data = await _context.Absence.FirstOrDefaultAsync(m => m.ID == id);
 
-            var absence = await _context.Absence
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (absence == null)
-            {
-                return NotFound();
-            }
+            var person = _context.User.FirstOrDefault(x => x.ID == data.UserRefId);
 
-            return View(absence);
+            ViewBag.Name = person;
+
+            return View(data);
         }
 
         // GET: Absence/Create
@@ -68,24 +106,20 @@ namespace Geo.Controllers
         }
 
         // GET: Absence/Edit/5?userID=0
-        public async Task<IActionResult> Edit(int? id, int userID = 1)
+        public async Task<IActionResult> Edit(int? id)
         {
-
-            if (userID != 0)
-            {
-                return NotFound();
-            }
-
             if (id == null || _context.Absence == null)
             {
                 return NotFound();
             }
 
-            var absence = await _context.Absence.FindAsync(id);
+            var absence = await _context.Absence.FirstOrDefaultAsync(x => x.ID == id);
+
             if (absence == null)
             {
                 return NotFound();
             }
+
             return View(absence);
         }
 
@@ -94,19 +128,20 @@ namespace Geo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,name,absenceType,startDate,endDate, approved")] Absence absence)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,name,absenceReason, absenceType,startDate,endDate, approved")] Absence absence)
         {
-            if (id != absence.ID)
-            {
-                return NotFound();
-            }
-
+            //if (id != absence.ID)
+            //{
+            //    return NotFound();
+            //}
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(absence);
+                    var data = await _context.Absence.FirstOrDefaultAsync(x => x.ID == id);
+                    _context.Update(data);
                     await _context.SaveChangesAsync();
+                    return View("Index");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,7 +156,8 @@ namespace Geo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(absence);
+
+            return View("Index", absence);
         }
 
         // GET: Absence/Delete/5

@@ -8,20 +8,17 @@ namespace Geo.Models
         [Display(Name = "Form ID")]
         public int ID { get; set; }
 
-        [ForeignKey("User")]
+        // the reference to the user able to retrieve the user by calling for this ID
+        [Display(Name = "User")]
         public int? UserRefId { get; set; }
-        public User user { get; set; }
 
-        [ForeignKey("AbsenceType")]
+        // the reference to the type of absence, able to adjust this later and add more if needed
         public int? AbsenceTypeRefID { get; set; }
 
+
         // Changes up until this point future me will thank me :)
-
-        [Display(Name = "Enter your name")]
-        public string name { get; set; }
-
         [Display(Name = "Reason of absence")]
-        public string absenceReason { get; set; }
+        public string? absenceReason { get; set; }
 
         [Display(Name = "Starting date")]
         public DateTime? startDate { get; set; }

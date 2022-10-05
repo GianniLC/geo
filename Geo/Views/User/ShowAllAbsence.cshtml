@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Geo.Models.ViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Absences by @ViewBag.fullname</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.user.fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.absence.absenceReason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.absence.startDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.absence.endDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.absence.approved)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.fname)
+                    @Html.DisplayFor(modelItem => item.user.lname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.absence.absenceReason)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.absence.startDate)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.absence.endDate)
+                </td>
+
+                <td>
+                    @{
+                        switch (@item.absence.approved)
+                        {
+                            case "0":
+                                <text>
+                                                <p>Not approved</p>
+                                </text>
+                                break;
+
+                            case "1":
+                                <text>
+                                                <p>Approved</p>
+                                </text>
+                                break;
+
+                            case "2":
+                                <text>
+                                                <p>In review</p>
+                                </text>
+                                break;
+
+                            default:
+                                <text>
+                                                <p>In review</p>
+                                </text>
+                                break;
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

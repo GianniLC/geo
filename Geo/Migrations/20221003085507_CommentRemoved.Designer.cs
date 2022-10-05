@@ -4,6 +4,7 @@ using Geo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Geo.Migrations
 {
     [DbContext(typeof(GeoContext))]
-    partial class GeoContextModelSnapshot : ModelSnapshot
+    [Migration("20221003085507_CommentRemoved")]
+    partial class CommentRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,10 +110,6 @@ namespace Geo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("lname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

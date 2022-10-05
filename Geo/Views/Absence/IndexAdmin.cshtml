@@ -76,12 +76,15 @@
                 }
             }
             </td>
+
             <td>
                     @Html.DisplayFor(modelItem => item.absence.ID)
             </td>
+
             <td>
                     <a asp-action="Details" asp-route-id="@item.absence.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.absence.ID">Delete</a> 
+                    <a asp-action="Delete" asp-route-id="@item.absence.ID">Delete</a> |
+                    <a asp-action="Edit" asp-route-id="@item.absence.ID">Edit</a>
             </td>
         </tr>
 }

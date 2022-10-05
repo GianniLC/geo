@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Geo.Data;
 using Geo.Models;
+using System.Dynamic;
 
 namespace Geo.Controllers
 {
@@ -18,6 +19,8 @@ namespace Geo.Controllers
         {
             _context = context;
         }
+
+        #region generated crud code
 
         // GET: User
         public async Task<IActionResult> Index()
@@ -41,6 +44,12 @@ namespace Geo.Controllers
             {
                 return NotFound();
             }
+
+            var query = from Absence in _context.Absence
+                        where Absence.UserRefId == id
+                        select Absence;
+
+            user.absences = query.ToList();
 
             return View(user);
         }
@@ -158,6 +167,58 @@ namespace Geo.Controllers
         private bool UserExists(int id)
         {
           return (_context.User?.Any(e => e.ID == id)).GetValueOrDefault();
+        }
+        #endregion
+
+        public async Task<IActionResult> RequestAbsence(int id)
+        {
+            ViewBag.id = id;
+            return View("Absence");
+        }
+
+        [HttpPost, ActionName("Request")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> requestAbsence([Bind("absenceReason, UserRefId")] Absence absence)
+        {
+            if (ModelState.IsValid)
+            {
+                // retrieve the user
+                //var user = await _context.User.FirstOrDefaultAsync(x => x.ID == absence.UserRefId);
+                // add the absency to the database
+                _context.Add(absence);
+
+                // save the changes
+                await _context.SaveChangesAsync();
+
+                // redirect to the index
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Absence");
+        }
+
+        public async Task<IActionResult> ShowAllAbsence(int id)
+        {
+            List<ViewModel> models = new();
+
+            
+
+            var person = await _context.User.FirstOrDefaultAsync(x => x.ID == id);
+            //var data = await _context.Absence.FirstOrDefaultAsync(z => z.UserRefId == id);
+
+            var data = await _context.Absence.Where(t => t.UserRefId == id).ToListAsync();
+
+            foreach (var item in data)
+            {
+                ViewModel model = new();
+                model.absence = item;
+                model.user = person;
+
+                models.Add(model);
+            }
+
+            ViewBag.fullName = $"{person.fname} {person.lname}";
+
+            return View(models);
         }
     }
 }
